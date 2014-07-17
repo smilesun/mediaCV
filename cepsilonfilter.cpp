@@ -43,7 +43,7 @@ uchar CepsilonFilter::getNeighborWeight(int row,int col,int k)
     kernel.at<float>(2,3)= 2.0/32;
     kernel.at<float>(3,2)= 2.0/32;
 
-    uchar epsilon=3;
+    uchar epsilon=20;
 
     //
 
