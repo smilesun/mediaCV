@@ -12,7 +12,7 @@
 #include "mainwindow.h"
 
 /*
-class CWebCam:public QWidget
+class CWebCam
 {
 public:
     CWebCam(Ui::MainWindow * parent);
@@ -31,5 +31,6 @@ public:
     QImage *qImg;
     QTimer *timer;
 };
+
 */
 #endif // CWEBCAM_H

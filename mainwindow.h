@@ -8,6 +8,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
+//
 #include "cimgcontroller.h"
 #include "cimgproc.h"
 #include "cepsilonfilter.h"
@@ -20,6 +21,11 @@ using namespace cv;
 namespace Ui {
 class MainWindow;
 }
+
+class CImgController;
+#define BEFORE_CPU_COUNT  double duration;duration = static_cast<double>(cv::getTickCount());
+#define AFTER_CPU_COUNT    duration = static_cast<double>(cv::getTickCount())-duration;duration /= cv::getTickFrequency();qDebug()<<"exe time is"<<duration;
+
 
 class MainWindow : public QMainWindow
 {
@@ -47,15 +53,16 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ///*******user defined
+    QTimer *timer;
     CImgController* pImgController;
     CImgProc * pstrategy;
     cv::Mat image;
     cv::Mat rst;
     cv::Mat* psharedImg;
     class CWebCam *pwebcam;
-    void displayOutImg(cv::Mat* prst);
-    void displayInImg(cv::Mat& prst);
-    int bilateral_kernel_len;
+    void displayOutImg(cv::Mat);
+    void displayInImg(cv::Mat);
+
     bool bsync;
     cv::VideoCapture* pcap;
     cv::CascadeClassifier cascade;

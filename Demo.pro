@@ -31,7 +31,8 @@ HEADERS  += mainwindow.h \
     SourceASM/asmfitting.h \
     SourceASM/asmlibrary.h \
     SourceASM/video_camera.h \
-    SourceASM/vjfacedetect.h
+    SourceASM/vjfacedetect.h \
+    ../OpenCV2ComputerVisionApplicationProgrammingCookbook/3241_Code/Chapter 03/colorDetectController.h
 
 FORMS    += mainwindow.ui
 

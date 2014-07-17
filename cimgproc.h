@@ -12,10 +12,18 @@ class CImgProc : public QObject
 public:
     explicit CImgProc(QObject *parent = 0);
     virtual void process(const cv::Mat &image, cv::Mat &result);
+    void salt(cv::Mat &,int);
+    void convert_video(char*,char* );
+    void sharpen(const cv::Mat &image, cv::Mat &result);//laplasian
+    void getColorRange();
 
 signals:
 
 public slots:
+private:
+    cv::Mat inMat;
+    cv::Mat rstMat;
+
 
 };
 
