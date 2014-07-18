@@ -16,6 +16,7 @@ public:
     void detectAndDraw( Mat& img, CascadeClassifier& cascade,
                     CascadeClassifier& nestedCascade,
                     double scale, bool tryflip );
+    int demo_asm(char* model_name, char* cascade_name);
     explicit CImgProc(QObject *parent = 0);
     virtual void process(const cv::Mat &image, cv::Mat &result);
     void salt(cv::Mat &,int);

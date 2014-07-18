@@ -77,8 +77,7 @@ public:
     //void setInputImage(std::string);
     cv::Mat getInput()
     {
-
-            return inMat;
+        return inMat;
     }
     cv::Mat getLastOutput()
     {

@@ -59,8 +59,9 @@ void MainWindow::displayInImg(cv::Mat image)
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    CImgController::getInstance()->process();
-    displayOutImg(CImgController::getInstance()->getLastOutput());
+    //CImgController::getInstance()->pstrategy->demo_asm("", "");
+    // CImgController::getInstance()->process();
+    //displayOutImg(CImgController::getInstance()->getLastOutput());
 }
 
 void MainWindow::displayOutImg(cv::Mat rst)

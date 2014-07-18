@@ -12,27 +12,27 @@ TARGET = Demo
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    cimgproc.cpp \
-    cepsilonfilter.cpp \
-    cimgcontroller.cpp \
-    cwebcam.cpp \
-    SourceASM/demo_fit.cpp \
+SOURCES +=SourceASM/demo_fit.cpp \
     SourceASM/video_camera.cpp \
-    SourceASM/vjfacedetect.cpp
+    SourceASM/vjfacedetect.cpp \
+    src/cepsilonfilter.cpp \
+    src/cimgcontroller.cpp \
+    src/cimgproc.cpp \
+    src/cwebcam.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    cimgproc.h \
-    cepsilonfilter.h \
-    cimgcontroller.h \
-    cwebcam.h \
-    SourceASM/asmbuilding.h \
+HEADERS  +=SourceASM/asmbuilding.h \
     SourceASM/asmfitting.h \
     SourceASM/asmlibrary.h \
     SourceASM/video_camera.h \
     SourceASM/vjfacedetect.h \
-    ../OpenCV2ComputerVisionApplicationProgrammingCookbook/3241_Code/Chapter 03/colorDetectController.h
+    ../OpenCV2ComputerVisionApplicationProgrammingCookbook/3241_Code/Chapter 03/colorDetectController.h \
+    include/cepsilonfilter.h \
+    include/cimgcontroller.h \
+    include/cimgproc.h \
+    include/cwebcam.h \
+    include/mainwindow.h
 
 FORMS    += mainwindow.ui
 
@@ -64,7 +64,9 @@ INCLUDEPATH += $$PWD/../../../../../../../usr/include
 DEPENDPATH += $$PWD/../../../../../../../usr/include
 
 OTHER_FILES += \
-    libs/libasmlibrary.so
+    libs/libasmlibrary.so \
+    Resources/haarcascade_frontalface_alt2.xml \
+    Resources/my68-1d.amf
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/SourceASM/release/ -lasmlibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/SourceASM/debug/ -lasmlibrary
@@ -72,3 +74,5 @@ else:unix: LIBS += -L$$PWD/SourceASM/ -lasmlibrary
 
 INCLUDEPATH += $$PWD/SourceASM
 DEPENDPATH += $$PWD/SourceASM
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include

@@ -11,9 +11,9 @@ CepsilonFilter::CepsilonFilter()
 
 void CepsilonFilter::process(const cv::Mat &image, cv::Mat &result)
 {
-    pimage=&image;
-    presult=&result;
-    epsilonFilter();
+   // pimage=&image;
+   // presult=&result;
+   // epsilonFilter();
 }
 
 
