@@ -3,6 +3,8 @@
 CImgProc::CImgProc(QObject *parent) :
     QObject(parent)
 {
+    this->cascade.load("../haarcascades/haarcascade_frontalface_alt.xml");
+    this->nestedCascade.load("../haarcascades/haarcascade_eye.xml");
 }
 
 void CImgProc::process(const cv::Mat &image, cv::Mat &result)

@@ -11,6 +11,7 @@
 #include <QWidget>
 #include "mainwindow.h"
 
+
 /*
 class CWebCam
 {

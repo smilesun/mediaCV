@@ -15,16 +15,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->pushButton_2->setEnabled(false);
-
-    this->cascade.load("../haarcascades/haarcascade_frontalface_alt.xml");
-    this->nestedCascade.load("../haarcascades/haarcascade_eye.xml");
 }
 
 MainWindow::~MainWindow()
 {
     delete this->pwebcam;
     delete ui;
-    delete pcap;
+    if(pcap)
+    {
+        pcap->release();
+        delete pcap;
+        pcap=NULL;
+    }
 }
 
 
@@ -73,9 +75,6 @@ void MainWindow::displayOutImg(cv::Mat rst)
     ui->label_output->resize(ui->label_output->pixmap()->size());
 }
 
-
-int demo_asm(char* model_name, char* cascade_name);
-
 void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 {
 
@@ -83,10 +82,7 @@ void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 
     // open the default camera
     pcap=new VideoCapture(0);
-    if(!pcap->isOpened())  // check if we succeeded
-        return;
-
-
+    if(!pcap->isOpened())  return;// check if we succeeded
     timer=new QTimer(this);
     timer->setInterval(100);
     connect(timer,SIGNAL(timeout()),this,SLOT(nextFrame()));
@@ -107,11 +103,12 @@ void MainWindow::on_horizontalSlider_sliderReleased()
 
 void MainWindow::nextFrame()
 {
-
-          *pcap >> (this->image);//frame; // get a new frame from camera
-           this->rst=this->image.clone();// crucial for displaying
-           displayInImg(this->image);
-           displayOutImg(this->rst);
+           cv::Mat temp;
+           *pcap >>temp;
+           CImgController::getInstance()->setInputImage(temp);
+           CImgController::getInstance()->process();
+           displayInImg(CImgController::getInstance()->getInput());
+           displayOutImg(CImgController::getInstance()->getLastOutput());
 }
 
 

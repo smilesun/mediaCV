@@ -32,10 +32,8 @@ public:
     int bilateral_kernel_len;
     void process()
     {
-
-
-        pstrategy->process(inMat,rstMat);
         BEFORE_CPU_COUNT
+        pstrategy->process(inMat,rstMat);
         //bilateralFilter(inMat,rstMat,this->bilateral_kernel_len,bilateral_kernel_len*2,bilateral_kernel_len/2);
         AFTER_CPU_COUNT
     }
@@ -49,6 +47,11 @@ public:
        }
        else
            return pSingleton;
+    }
+    void setInputImage(cv::Mat in)
+    {
+        inMat=in;
+        rstMat=inMat.clone();
     }
     bool setInputImage(std::string filename) {
 

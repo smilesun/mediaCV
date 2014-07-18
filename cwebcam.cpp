@@ -1,8 +1,7 @@
 #include "cwebcam.h"
 /*
-CWebCam::CWebCam(Ui::MainWindow*  parent)
+CWebCam::CWebCam()
 {
-    this->pwin=parent;
     isCamera=false;
 }
 
