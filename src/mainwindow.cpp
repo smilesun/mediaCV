@@ -76,7 +76,7 @@ void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
     qDebug("comboBox");
     vd.open();
     timer=new QTimer(this);
-    timer->setInterval(100);
+    timer->setInterval(FRAME_RATE);
     connect(timer,SIGNAL(timeout()),this,SLOT(nextFrame()));
     timer->start();
 }

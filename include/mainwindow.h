@@ -24,6 +24,7 @@ class CImgController;
 #define BEFORE_CPU_COUNT  double duration;duration = static_cast<double>(cv::getTickCount());
 #define AFTER_CPU_COUNT    duration = static_cast<double>(cv::getTickCount())-duration;duration /= cv::getTickFrequency();qDebug()<<"exe time is"<<duration;
 
+#define FRAME_RATE 1000// if the frame rate is too fast, the process is not enough to complete
 
 class MainWindow : public QMainWindow
 {
