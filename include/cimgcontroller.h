@@ -20,21 +20,24 @@ class CImgController
 private:
 
     static CImgController* pSingleton;
-    CImgProc * pstrategy;
+
     cv::Mat inMat;
     cv::Mat rstMat;
     CImgController()
     {
-        pstrategy=static_cast<CImgProc*>(new CepsilonFilter());
+        pstrategy=new CImgProc();
+        //pstrategy=static_cast<CImgProc*>(new CepsilonFilter());
         this->bilateral_kernel_len=7;
     }
 public:
+    CImgProc * pstrategy;
     int bilateral_kernel_len;
+
+
     void process()
     {
         BEFORE_CPU_COUNT
         pstrategy->process(inMat,rstMat);
-        //bilateralFilter(inMat,rstMat,this->bilateral_kernel_len,bilateral_kernel_len*2,bilateral_kernel_len/2);
         AFTER_CPU_COUNT
     }
 

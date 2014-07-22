@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include<QCloseEvent>
 /************************************************************/
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -11,6 +12,7 @@
 /***************************************************************/
 #include "cimgcontroller.h"
 #include "cwebcam.h"
+#include "cvideodevice.h"
 /*******************************************************************/
 
 using namespace cv;
@@ -48,21 +50,13 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-
     ///*******user defined
-
-    CImgController* pImgController;
-
-    cv::Mat image;
-    cv::Mat rst;
-
     void displayOutImg(cv::Mat);
     void displayInImg(cv::Mat);
 /****************************************/
-    class CWebCam *pwebcam;
-    cv::VideoCapture* pcap;
+    CVideoDevice vd;
     QTimer *timer;
-
+    CImgController* pImgController;
 /****************************************/
 
 };

@@ -7,31 +7,30 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/opencv.hpp>
-using namespace cv;
-class CImgProc : public QObject
-{
-    Q_OBJECT
+#include "cdetecttrack.h"
 
+using namespace cv;
+
+
+
+class CImgProc
+{
+    //Q_OBJECT
 public:
-    void detectAndDraw( Mat& img, CascadeClassifier& cascade,
-                    CascadeClassifier& nestedCascade,
-                    double scale, bool tryflip );
-    int demo_asm(char* model_name, char* cascade_name);
-    explicit CImgProc(QObject *parent = 0);
+    CImgProc();
     virtual void process(const cv::Mat &image, cv::Mat &result);
     void salt(cv::Mat &,int);
     void convert_video(char*,char* );
     void sharpen(const cv::Mat &image, cv::Mat &result);//laplasian
     void getColorRange();
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 private:
+    CDetectTrack cd;
     cv::Mat inMat;
     cv::Mat rstMat;
-    cv::CascadeClassifier cascade;
-    cv::CascadeClassifier nestedCascade;
 
 
 };

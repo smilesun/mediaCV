@@ -19,14 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete this->pwebcam;
+
     delete ui;
-    if(pcap)
-    {
-        pcap->release();
-        delete pcap;
-        pcap=NULL;
-    }
+
 }
 
 
@@ -59,9 +54,8 @@ void MainWindow::displayInImg(cv::Mat image)
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    //CImgController::getInstance()->pstrategy->demo_asm("", "");
-    // CImgController::getInstance()->process();
-    //displayOutImg(CImgController::getInstance()->getLastOutput());
+    CImgController::getInstance()->process();
+    displayOutImg(CImgController::getInstance()->getLastOutput());
 }
 
 void MainWindow::displayOutImg(cv::Mat rst)
@@ -80,18 +74,11 @@ void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 {
 
     qDebug("comboBox");
-
-    // open the default camera
-    pcap=new VideoCapture(0);
-    if(!pcap->isOpened())  return;// check if we succeeded
+    vd.open();
     timer=new QTimer(this);
     timer->setInterval(100);
     connect(timer,SIGNAL(timeout()),this,SLOT(nextFrame()));
     timer->start();
-
-    //demo_main();
-
-
 }
 
 
@@ -105,22 +92,25 @@ void MainWindow::on_horizontalSlider_sliderReleased()
 void MainWindow::nextFrame()
 {
            cv::Mat temp;
-           *pcap >>temp;
+           if(!vd.getFrame(temp)) return;
+
+           //process
            CImgController::getInstance()->setInputImage(temp);
            CImgController::getInstance()->process();
+           //display
            displayInImg(CImgController::getInstance()->getInput());
            displayOutImg(CImgController::getInstance()->getLastOutput());
+
 }
 
-
+/*void MainWindow::event(QEvent *event)
+{
+ if(event->type()==QEvent::Close)  ~MainWindow();
+}
+*/
 /*
 class MyThread:public QThread
 {
    public:
 
 }*/
-
-
-
-
-
