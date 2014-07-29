@@ -1,44 +1,65 @@
 #ifndef CIMGCONTROLLER_H
 #define CIMGCONTROLLER_H
 
-
-
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include "cimgproc.h"
 #include "cepsilonfilter.h"
+#include "cdetecttrack.h"
 #include "mainwindow.h"
 #include <QDebug>
 #define BEFORE_CPU_COUNT  double duration;duration = static_cast<double>(cv::getTickCount());
 #define AFTER_CPU_COUNT    duration = static_cast<double>(cv::getTickCount())-duration;duration /= cv::getTickFrequency();qDebug()<<"exe time is"<<duration;
 
 
-
-class CImgController
+class CImgContext
 {
+public:
+    int _constrast;
+    int _brightness;
+};
 
+
+class CImgController //:public QObject
+{
+//Q_OBJECT
 private:
-
     static CImgController* pSingleton;
-
     cv::Mat inMat;
     cv::Mat rstMat;
-    CImgController()
+    cv::Mat imgCapture;
+
+    CImgController()//singletion pattern,constructor must be private!!!
     {
-        pstrategy=new CImgProc();
+         pstrategy=new CImgProc();
+
+
         //pstrategy=static_cast<CImgProc*>(new CepsilonFilter());
-        this->bilateral_kernel_len=7;
     }
+
 public:
+    CImgContext context;
     CImgProc * pstrategy;
-    int bilateral_kernel_len;
 
-
-    void process()
+    void setCapture()
     {
-        BEFORE_CPU_COUNT
-        pstrategy->process(inMat,rstMat);
-        AFTER_CPU_COUNT
+        imgCapture=inMat.clone();
+        cv::imwrite("capture.jpg",imgCapture);
+
+    }
+    void streamProcess()// handle video stream
+    {
+
+    }
+
+    void processOnePicture()
+    {
+
+        //BEFORE_CPU_COUNT
+        if(inMat.empty()||rstMat.empty()) return;
+        pstrategy->processOnePicture(inMat,rstMat);
+        //AFTER_CPU_COUNT
+
     }
 
     static CImgController* getInstance()
@@ -88,5 +109,7 @@ public:
     }
 
 };
+
+
 
 #endif // CIMGCONTROLLER_H

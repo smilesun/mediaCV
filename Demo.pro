@@ -37,7 +37,9 @@ HEADERS  +=SourceASM/asmbuilding.h \
     include/mainwindow.h \
     include/cfacialBeauty.h \
     include/cdetecttrack.h \
-    include/cvideodevice.h
+    include/cvideodevice.h \
+    include/demo.h \
+    include/CThreadWorker.h
 
 FORMS    += mainwindow.ui
 

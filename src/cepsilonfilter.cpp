@@ -1,19 +1,24 @@
 #include "cepsilonfilter.h"
 
-
-CepsilonFilter::CepsilonFilter()
-{
-
-
-
-}
-
-
+CepsilonFilter::CepsilonFilter(){}
 void CepsilonFilter::process(const cv::Mat &image, cv::Mat &result)
 {
-   // pimage=&image;
-   // presult=&result;
-   // epsilonFilter();
+
+  /* cv::Mat hsv;
+   cv::cvtColor(image,hsv,CV_BGR2HSV);
+   std::vector<cv::Mat> sbgr(hsv.channels());
+
+   std::vector<cv::Mat> eq(hsv.channels());
+
+   cv::split(hsv,sbgr);
+
+   eq[0]=sbgr[0].clone();
+   eq[1]=sbgr[1].clone();
+   epsilonFilter(sbgr[2],eq[2]);
+   cv::Mat hsv2;
+   cv::merge(eq,hsv2);
+   cv::cvtColor(hsv2,result,CV_HSV2BGR);
+   */
 }
 
 
@@ -87,8 +92,9 @@ uchar CepsilonFilter::getNeighborWeight(int row,int col,int k)
 }
 */
 int n=3;
-void CepsilonFilter::epsilonFilter()//
+/*void CepsilonFilter::epsilonFilter(cv::Mat& image,cv::Mat result)//
 {
+
     if(pimage->channels()==1)
     {
     }//if
@@ -108,6 +114,8 @@ void CepsilonFilter::epsilonFilter()//
             }
     }//elseif
     else;
+
 }
+*/
 
 
